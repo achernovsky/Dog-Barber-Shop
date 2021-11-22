@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Dog_Barber_Shop_API.Controllers
 {
-    [Route("clients")]
+    [Route("appointments")]
     [ApiController]
-    public class ClientsController : ControllerBase
+    public class AppointmentsController : ControllerBase
     {
     }
 }

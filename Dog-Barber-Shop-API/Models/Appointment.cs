@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Dog_Barber_Shop_API.Models
 {
-    public class Client
+    public class Appointment
     {
         [Required]
-        public string Name { get; set; }
+        public string ClientName { get; set; }
         [Required]
-        public DateTime AppointmentTime { get; set; }
+        public DateTime Time { get; set; }
     }
 }
