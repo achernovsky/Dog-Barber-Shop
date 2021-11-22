@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Dog_Barber_Shop_API.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dog_Barber_Shop_API.Repositories;
 
 namespace Dog_Barber_Shop_API.Controllers
 {
@@ -11,5 +13,18 @@ namespace Dog_Barber_Shop_API.Controllers
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
+        private readonly AppointmentRepo _repository = new AppointmentRepo();
+
+        [HttpGet]
+        public ActionResult <IEnumerable<Appointment>> GetAppointments()
+        {
+            return Ok(_repository.GetAppointments());
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Appointment> GetAppointment(int id)
+        {
+            return Ok(_repository.GetAppointment(id));
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Dog_Barber_Shop_API.Repositories
     public interface IAppointmentRepo
     {
         IEnumerable<Appointment> GetAppointments();
-        Appointment GetAppointment();
+        Appointment GetAppointment(int id);
         void CreateAppointment();
         void EditAppointment();
     }
