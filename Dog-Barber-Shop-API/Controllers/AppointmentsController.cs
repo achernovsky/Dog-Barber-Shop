@@ -13,7 +13,11 @@ namespace Dog_Barber_Shop_API.Controllers
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
-        private readonly AppointmentRepo _repository = new AppointmentRepo();
+        private readonly IAppointmentRepo _repository;
+        public AppointmentsController(IAppointmentRepo reposotory)
+        {
+            _repository = reposotory;
+        }
 
         [HttpGet]
         public ActionResult <IEnumerable<Appointment>> GetAppointments()
