@@ -30,7 +30,7 @@ namespace Dog_Barber_Shop_API
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DogBarberShopConnection"));
             });
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddScoped<IAppointmentRepo, AppointmentRepo>();
         }
 

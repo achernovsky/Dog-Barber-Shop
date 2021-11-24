@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dog_Barber_Shop_API.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Dog_Barber_Shop_API.Repositories
 {
     public interface IAppointmentRepo
     {
-        IEnumerable<Appointment> GetAppointments();
-        Appointment GetAppointment(int id);
-        void CreateAppointment();
-        void EditAppointment();
+        Task<bool> SaveChanges();
+        Task <IEnumerable<Appointment>> GetAppointments();
+        Task<Appointment> GetAppointment(int id);
+        Task CreateAppointment(Appointment appointment);
+        Task DeleteAppointment(int id);
+        Task<Appointment> PatchAppointment(int id, JsonPatchDocument<Appointment> patchData);
     }
 }
