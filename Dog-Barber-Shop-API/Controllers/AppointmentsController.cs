@@ -7,9 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dog_Barber_Shop_API.Repositories;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dog_Barber_Shop_API.Controllers
 {
+    [Authorize(Roles = UserRoles.Client)]
     [Route("appointments")]
     [ApiController]
     public class AppointmentsController : ControllerBase
