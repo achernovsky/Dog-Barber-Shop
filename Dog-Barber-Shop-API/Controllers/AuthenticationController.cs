@@ -55,6 +55,12 @@ namespace Dog_Barber_Shop_API.Controllers
             else
                 return Unauthorized();
         }
-
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
+        {
+            await _repository.ChangePassword(model);
+            return Ok("Paasword changed successfully");
+        }
     }
 }

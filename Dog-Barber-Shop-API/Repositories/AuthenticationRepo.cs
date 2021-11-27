@@ -102,5 +102,24 @@ namespace Dog_Barber_Shop_API.Repositories
             }
             return null;
         }
+
+        public async Task ChangePassword(ChangePasswordModel model)
+        {
+            var user = await userManager.FindByNameAsync(model.UserName);
+            if (user == null)
+                throw new Exception("Username does not exist");
+            if (string.Compare(model.NewPassword, model.ConfirmedNewPassword) != 0)
+                throw new Exception("New password and confirmed new password don't match");
+
+            var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+            if (!result.Succeeded)
+            {
+                var errors = new List<string>();
+                foreach (var error in result.Errors)
+                    errors.Add(error.Description);
+
+                throw new Exception(string.Join(", ", errors));
+            }
+        }
     }
 }
