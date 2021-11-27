@@ -32,6 +32,9 @@ namespace Dog_Barber_Shop_API.Repositories
             if (appointment == null)
                 throw new ArgumentNullException(nameof(appointment));
 
+            if (appointment.DogName == null)
+                throw new Exception("Dog name cannot be empty");
+
             var newAppointment = new Appointment
             {
                 DogName = appointment.DogName,
@@ -43,6 +46,8 @@ namespace Dog_Barber_Shop_API.Repositories
         public async Task DeleteAppointment(int id)
         {
             var appointment = await _context.Appointments.FindAsync(id);
+            if (appointment == null)
+                throw new Exception("Appointment doesn't exist");
             _context.Appointments.Remove(appointment);
             await SaveChanges();
         }
