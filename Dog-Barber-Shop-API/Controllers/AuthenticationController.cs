@@ -30,10 +30,19 @@ namespace Dog_Barber_Shop_API.Controllers
 
         [HttpPost]
         [Route("RegisterClient")]
-        public async Task<IActionResult> RegisterClient([FromBody] RegisterModel model)
+        public async Task<IActionResult> RegisterClient([FromBody] RegisterClientModel model)
         {
             await _repository.RegisterClient(model);
             return Ok("Client created successfully");
+        }
+
+        [Authorize(Roles = UserRoles.Admin)]
+        [HttpPost]
+        [Route("RegisterAdmin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterAdminModel model)
+        {
+            await _repository.RegisterAdmin(model);
+            return Ok("Admin created successfully");
         }
 
         [HttpPost] 

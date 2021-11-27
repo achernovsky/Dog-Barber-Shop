@@ -30,14 +30,7 @@ namespace Dog_Barber_Shop_API.Repositories
             _configuration = configuration;
         }
         
-        public async Task RegisterClient(RegisterModel model)
-        {
-            ApplicationUser user = await Register(model);
-            if (await roleManager.RoleExistsAsync(UserRoles.Client))
-                await userManager.AddToRoleAsync(user, UserRoles.Client);
-        }
-
-        public async Task<ApplicationUser> Register(RegisterModel model)
+        public async Task RegisterClient(RegisterClientModel model)
         {
             var userExist = await userManager.FindByNameAsync(model.UserName);
             if (userExist != null)
@@ -56,7 +49,30 @@ namespace Dog_Barber_Shop_API.Repositories
             if (!await roleManager.RoleExistsAsync(UserRoles.Client))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Client));
 
-            return user;
+            if (await roleManager.RoleExistsAsync(UserRoles.Client))
+                await userManager.AddToRoleAsync(user, UserRoles.Client);
+        }
+
+        public async Task RegisterAdmin(RegisterAdminModel model)
+        {
+            var userExist = await userManager.FindByNameAsync(model.UserName);
+            if (userExist != null)
+                throw new Exception("User already exists");
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = model.UserName
+            };
+            var result = await userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                throw new Exception("User creation failed");
+
+            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+
+            if (await roleManager.RoleExistsAsync(UserRoles.Admin))
+                await userManager.AddToRoleAsync(user, UserRoles.Admin);
         }
 
         public async Task<JwtSecurityToken> Login(LoginModel model)

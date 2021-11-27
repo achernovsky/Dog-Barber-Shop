@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dog_Barber_Shop_API.Models
 {
-    public class RegisterModel
+    public class RegisterClientModel
     {
         [Required(ErrorMessage = "User name is required")]
         public string UserName { get; set; }
