@@ -1,12 +1,8 @@
-﻿using Dog_Barber_Shop_API.Models;
+﻿using Dog_Barber_Shop_API.Utils;
 using Dog_Barber_Shop_API.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dog_Barber_Shop_API.Controllers

@@ -1,4 +1,4 @@
-﻿using Dog_Barber_Shop_API.Models;
+﻿using Dog_Barber_Shop_API.Utils;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Threading.Tasks;
 

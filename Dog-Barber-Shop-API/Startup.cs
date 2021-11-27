@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dog_Barber_Shop_API.Repositories;
-using Dog_Barber_Shop_API.Models;
+using Dog_Barber_Shop_API.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

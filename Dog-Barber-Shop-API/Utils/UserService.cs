@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 
-namespace Dog_Barber_Shop_API.Models
+namespace Dog_Barber_Shop_API.Utils
 {
     public class UserService : IUserService
     {

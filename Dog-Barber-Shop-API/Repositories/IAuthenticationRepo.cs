@@ -1,8 +1,5 @@
-﻿using Dog_Barber_Shop_API.Models;
-using System;
-using System.Collections.Generic;
+﻿using Dog_Barber_Shop_API.Utils;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dog_Barber_Shop_API.Repositories
