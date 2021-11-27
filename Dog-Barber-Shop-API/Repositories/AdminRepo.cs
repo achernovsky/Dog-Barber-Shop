@@ -35,11 +35,7 @@ namespace Dog_Barber_Shop_API.Repositories
             if (appointment.DogName == null)
                 throw new Exception("Dog name cannot be empty");
 
-            var newAppointment = new Appointment
-            {
-                DogName = appointment.DogName,
-                Time = appointment.Time
-            };
+            var newAppointment = new Appointment(appointment.DogName, appointment.Time);
             await _context.Appointments.AddAsync(newAppointment);
         }
 

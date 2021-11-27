@@ -43,11 +43,7 @@ namespace Dog_Barber_Shop_API.Repositories
             if (appointment == null)
                 throw new ArgumentNullException(nameof(appointment));
 
-            var newAppointment = new Appointment
-            {
-                DogName = dogName,
-                Time = appointment.Time
-            };
+            var newAppointment = new Appointment(dogName, appointment.Time);
             await _context.Appointments.AddAsync(newAppointment);
         }
 

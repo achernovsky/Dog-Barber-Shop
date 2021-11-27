@@ -14,5 +14,14 @@ namespace Dog_Barber_Shop_API.Models
 
         [Required]
         public DateTime Time { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public Appointment(string dogName, DateTime time)
+        {
+            DogName = dogName;
+            Time = time;
+            CreatedAt = DateTime.Now;
+        }
     }
 }
