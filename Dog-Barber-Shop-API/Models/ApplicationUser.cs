@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dog_Barber_Shop_API.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string Name { get; set; }
+        [Required]
+        public string DogName { get; set; }
     }
 }

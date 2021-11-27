@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Dog_Barber_Shop_API.Repositories;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace Dog_Barber_Shop_API.Controllers
 {
@@ -56,8 +58,10 @@ namespace Dog_Barber_Shop_API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAppointment(int id)
         {
-            await _repository.DeleteAppointment(id);
-            return NoContent();
+            var deleted = await _repository.DeleteAppointment(id);
+            if (deleted)
+                return Ok();
+            return BadRequest();
         }
 
         [HttpPatch("{id}")]
@@ -67,8 +71,8 @@ namespace Dog_Barber_Shop_API.Controllers
             if (updatedAppointment == null)
                 return NotFound();
 
-            var created = await _repository.SaveChanges();
-            if (created)
+            var patched = await _repository.SaveChanges();
+            if (patched)
                 return Ok(updatedAppointment);
             else
                 return BadRequest();

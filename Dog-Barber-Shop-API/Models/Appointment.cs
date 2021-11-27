@@ -10,8 +10,7 @@ namespace Dog_Barber_Shop_API.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        public string ClientName { get; set; }
+        public string DogName { get; set; }
 
         [Required]
         public DateTime Time { get; set; }

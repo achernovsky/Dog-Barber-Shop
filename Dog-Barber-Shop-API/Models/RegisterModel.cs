@@ -12,7 +12,7 @@ namespace Dog_Barber_Shop_API.Models
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
-        public string Name { get; set; }
+        public string DogName { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }

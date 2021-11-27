@@ -13,7 +13,7 @@ namespace Dog_Barber_Shop_API.Repositories
         Task <IEnumerable<Appointment>> GetAppointments();
         Task<Appointment> GetAppointment(int id);
         Task CreateAppointment(Appointment appointment);
-        Task DeleteAppointment(int id);
+        Task<bool> DeleteAppointment(int id);
         Task<Appointment> PatchAppointment(int id, JsonPatchDocument<Appointment> patchData);
     }
 }

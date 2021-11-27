@@ -29,7 +29,7 @@ namespace Dog_Barber_Shop_API.Repositories
             this.roleManager = roleManager;
             _configuration = configuration;
         }
-
+        
         public async Task RegisterClient(RegisterModel model)
         {
             ApplicationUser user = await Register(model);
@@ -45,7 +45,7 @@ namespace Dog_Barber_Shop_API.Repositories
 
             ApplicationUser user = new ApplicationUser()
             {
-                Name = model.Name,
+                DogName = model.DogName,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.UserName
             };

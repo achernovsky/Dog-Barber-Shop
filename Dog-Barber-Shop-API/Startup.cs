@@ -44,6 +44,7 @@ namespace Dog_Barber_Shop_API
 
             services.AddScoped<IAppointmentRepo, AppointmentRepo>();
             services.AddScoped<IAuthenticationRepo, AuthenticationRepo>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<AppointmentContext>()
