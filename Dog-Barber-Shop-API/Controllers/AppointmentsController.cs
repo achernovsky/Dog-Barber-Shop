@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Dog_Barber_Shop_API.Controllers
 {
-    [Authorize(Roles = UserRoles.Client)]
     [Route("appointments")]
     [ApiController]
     public class AppointmentsController : ControllerBase
@@ -24,6 +23,7 @@ namespace Dog_Barber_Shop_API.Controllers
             _repository = reposotory;
         }
 
+        [Authorize(Roles = UserRoles.ClientOrAdmin)]
         [HttpGet]
         public async Task<ActionResult> GetAppointments()
         {
@@ -31,6 +31,7 @@ namespace Dog_Barber_Shop_API.Controllers
             return Ok(appointments);
         }
 
+        [Authorize(Roles = UserRoles.ClientOrAdmin)]
         [HttpGet("{id}", Name = "GetAppointment")]
         public async Task<ActionResult> GetAppointment(int id)
         {
@@ -40,6 +41,7 @@ namespace Dog_Barber_Shop_API.Controllers
             return Ok(appointment);
         }
 
+        [Authorize(Roles = UserRoles.Client)]
         [HttpPost]
         public async Task<ActionResult<Appointment>> CreateAppointment(Appointment appointment)
         {
@@ -55,6 +57,7 @@ namespace Dog_Barber_Shop_API.Controllers
                 return BadRequest();
         }
 
+        [Authorize(Roles = UserRoles.Client)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAppointment(int id)
         {
@@ -64,6 +67,7 @@ namespace Dog_Barber_Shop_API.Controllers
             return BadRequest();
         }
 
+        [Authorize(Roles = UserRoles.Client)]
         [HttpPatch("{id}")]
         public async Task<ActionResult> PatchAppointment(int id, [FromBody] JsonPatchDocument<Appointment> patchData)
         {
