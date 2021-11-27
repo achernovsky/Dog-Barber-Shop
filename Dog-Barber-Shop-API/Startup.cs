@@ -43,6 +43,7 @@ namespace Dog_Barber_Shop_API
             });
 
             services.AddScoped<IAppointmentRepo, AppointmentRepo>();
+            services.AddScoped<IAdminRepo, AdminRepo>();
             services.AddScoped<IAuthenticationRepo, AuthenticationRepo>();
             services.AddScoped<IUserService, UserService>();
 

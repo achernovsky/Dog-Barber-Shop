@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Dog_Barber_Shop_API.Controllers
 {
     [Authorize(Roles = UserRoles.Admin)]
-    [Route("admin")]
+    [Route("admin/appointments")]
     [ApiController]
     public class AdminController : ControllerBase
     {
