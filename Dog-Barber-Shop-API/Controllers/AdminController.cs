@@ -1,4 +1,4 @@
-﻿using Dog_Barber_Shop_API.Utils;
+﻿using Dog_Barber_Shop_API.Models;
 using Dog_Barber_Shop_API.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;

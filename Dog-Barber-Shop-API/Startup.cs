@@ -10,12 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dog_Barber_Shop_API.Repositories;
-using Dog_Barber_Shop_API.Utils;
+using Dog_Barber_Shop_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Dog_Barber_Shop_API.Utils;
 
 namespace Dog_Barber_Shop_API
 {
@@ -30,7 +31,7 @@ namespace Dog_Barber_Shop_API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppointmentContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DogBarberShopConnection"));
             });
@@ -48,7 +49,7 @@ namespace Dog_Barber_Shop_API
             services.AddScoped<IUserService, UserService>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<AppointmentContext>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
             services.AddAuthentication(options =>

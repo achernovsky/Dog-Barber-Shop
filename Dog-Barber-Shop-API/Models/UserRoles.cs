@@ -1,4 +1,4 @@
-﻿namespace Dog_Barber_Shop_API.Utils
+﻿namespace Dog_Barber_Shop_API.Models
 {
     public class UserRoles
     {

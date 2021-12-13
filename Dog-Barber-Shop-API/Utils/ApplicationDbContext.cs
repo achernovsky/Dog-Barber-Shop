@@ -4,9 +4,9 @@ using Dog_Barber_Shop_API.Models;
 
 namespace Dog_Barber_Shop_API.Utils
 {
-    public class AppointmentContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public AppointmentContext(DbContextOptions<AppointmentContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
                 
         }

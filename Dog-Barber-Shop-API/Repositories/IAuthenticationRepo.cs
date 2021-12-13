@@ -1,4 +1,4 @@
-﻿using Dog_Barber_Shop_API.Utils;
+﻿using Dog_Barber_Shop_API.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 

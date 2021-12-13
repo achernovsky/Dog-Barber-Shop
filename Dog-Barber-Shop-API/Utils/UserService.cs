@@ -6,9 +6,9 @@ namespace Dog_Barber_Shop_API.Utils
     public class UserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContext;
-        private readonly AppointmentContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public UserService(IHttpContextAccessor httpContext, AppointmentContext context)
+        public UserService(IHttpContextAccessor httpContext, ApplicationDbContext context)
         {
             _httpContext = httpContext;
             _context = context;

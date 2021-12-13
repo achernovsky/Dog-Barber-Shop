@@ -1,4 +1,4 @@
-﻿using Dog_Barber_Shop_API.Utils;
+﻿using Dog_Barber_Shop_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Dog_Barber_Shop_API.Repositories;

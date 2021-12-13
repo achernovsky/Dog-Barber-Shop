@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dog_Barber_Shop_API.Models;
 using Dog_Barber_Shop_API.Utils;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +10,11 @@ namespace Dog_Barber_Shop_API.Repositories
 {
     public class AppointmentRepo : IAppointmentRepo
     {
-        private readonly AppointmentContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IUserService _userService;
         private string dogName;
 
-        public AppointmentRepo(AppointmentContext context, IUserService userService)
+        public AppointmentRepo(ApplicationDbContext context, IUserService userService)
         {
             _context = context;
             _userService = userService;
