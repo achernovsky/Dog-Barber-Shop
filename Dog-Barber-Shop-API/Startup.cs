@@ -41,7 +41,7 @@ namespace Dog_Barber_Shop_API
                 opts.SerializerSettings.NullValueHandling
                 = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
+            
             services.AddScoped<IAppointmentRepo, AppointmentRepo>();
             services.AddScoped<IAdminRepo, AdminRepo>();
             services.AddScoped<IAuthenticationRepo, AuthenticationRepo>();
