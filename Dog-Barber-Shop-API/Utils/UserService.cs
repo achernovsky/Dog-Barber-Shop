@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
 namespace Dog_Barber_Shop_API.Utils
@@ -24,7 +25,7 @@ namespace Dog_Barber_Shop_API.Utils
         {
             var userName = GetUserName();
             var user = _context.ApplicationUsers.SingleOrDefault(u => u.UserName == userName);
-            var userId = user.Id;
+            var userId = _httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return userId;
         }
 

@@ -5,20 +5,22 @@ using Dog_Barber_Shop_API.Models;
 using Dog_Barber_Shop_API.Utils;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace Dog_Barber_Shop_API.Repositories
 {
     public class AppointmentRepo : IAppointmentRepo
     {
         private readonly ApplicationDbContext _context;
-        private readonly IUserService _userService;
+        private readonly IHttpContextAccessor _httpContext;
         private string userId;
 
-        public AppointmentRepo(ApplicationDbContext context, IUserService userService)
+        public AppointmentRepo(ApplicationDbContext context, IHttpContextAccessor httpContext)
         {
             _context = context;
-            _userService = userService;
-            userId = _userService.GetUserId();
+            _httpContext = httpContext;
+            userId = _httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
         public async Task<bool> SaveChanges()
