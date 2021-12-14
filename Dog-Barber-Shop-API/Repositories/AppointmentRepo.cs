@@ -12,13 +12,13 @@ namespace Dog_Barber_Shop_API.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IUserService _userService;
-        private string dogName;
+        private string userId;
 
         public AppointmentRepo(ApplicationDbContext context, IUserService userService)
         {
             _context = context;
             _userService = userService;
-            dogName = _userService.getDogName();
+            userId = _userService.GetUserId();
         }
 
         public async Task<bool> SaveChanges()
@@ -39,14 +39,45 @@ namespace Dog_Barber_Shop_API.Repositories
             if (appointment == null)
                 throw new ArgumentNullException(nameof(appointment));
 
-            var newAppointment = new Appointment(dogName, appointment.Time);
+            var dog = _context.Dogs.Find(appointment.DogId);
+
+            if (dog == null || dog.ApplicationUserId != userId)
+                throw new Exception("This is not your dog!");
+
+            DateTime appTime = appointment.Time;
+            DateTime now = DateTime.Now;
+            DayOfWeek day = appTime.DayOfWeek;
+            int hour = appTime.Hour;
+            int minutes = appTime.Minute;
+
+            if (appTime < now || day == DayOfWeek.Sunday || day == DayOfWeek.Saturday)
+                throw new Exception("Invalid date");
+
+            if (hour < 9 || hour >= 18)
+                throw new Exception("Invalid time");
+
+            if (minutes != 0 && minutes != 30)
+                throw new Exception("Invalid time");
+
+            bool isTimeTaken = false;
+            var appointments = _context.Appointments;
+
+            foreach (Appointment app in appointments) {
+                if (app.Time == appTime)
+                    isTimeTaken = true;
+            }
+
+            if (isTimeTaken)
+                throw new Exception("Sorry, This time slot is already taken.");
+
+            var newAppointment = new Appointment(appointment.DogId, userId, appointment.Time);
             await _context.Appointments.AddAsync(newAppointment);
         }
 
         public async Task<bool> DeleteAppointment(int id)
         {
             var appointment = await _context.Appointments.FindAsync(id);
-            if (appointment.DogName == dogName)
+            if (appointment.ApplicationUserId == userId)
             {
                 _context.Appointments.Remove(appointment);
                 await SaveChanges();
@@ -58,7 +89,7 @@ namespace Dog_Barber_Shop_API.Repositories
         public async Task<Appointment> PatchAppointment(int id, JsonPatchDocument<Appointment> patchData)
         { 
             var appointment = await _context.Appointments.FindAsync(id);
-            if (appointment == null || appointment.DogName != dogName)
+            if (appointment == null || appointment.ApplicationUserId != userId)
                 return null;
             patchData.ApplyTo(appointment);
             return appointment;

@@ -20,12 +20,19 @@ namespace Dog_Barber_Shop_API.Utils
             return userName;
         }
 
-        public string getDogName()
+        public string GetUserId()
         {
             var userName = GetUserName();
             var user = _context.ApplicationUsers.SingleOrDefault(u => u.UserName == userName);
-            var dogName = user.DogName;
-            return dogName;
+            var userId = user.Id;
+            return userId;
+        }
+
+        public int GetDogId()
+        {
+            var userId = GetUserId();
+            var dogId = _context.Dogs.SingleOrDefault(d => d.ApplicationUserId == userId).Id;
+            return dogId;
         }
     }
 }

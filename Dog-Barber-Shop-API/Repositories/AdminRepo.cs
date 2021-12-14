@@ -26,10 +26,10 @@ namespace Dog_Barber_Shop_API.Repositories
             if (appointment == null)
                 throw new ArgumentNullException(nameof(appointment));
 
-            if (appointment.DogName == null)
+            if (appointment.DogId == 0)
                 throw new Exception("Dog name cannot be empty");
 
-            var newAppointment = new Appointment(appointment.DogName, appointment.Time);
+            var newAppointment = new Appointment(appointment.DogId, appointment.ApplicationUserId, appointment.Time);
             await _context.Appointments.AddAsync(newAppointment);
         }
 

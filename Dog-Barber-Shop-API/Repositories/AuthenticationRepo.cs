@@ -33,7 +33,7 @@ namespace Dog_Barber_Shop_API.Repositories
 
             ApplicationUser user = new ApplicationUser()
             {
-                DogName = model.DogName,
+                Dogs = model.Dogs,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.UserName
             };

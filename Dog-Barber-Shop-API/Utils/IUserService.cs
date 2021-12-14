@@ -3,6 +3,7 @@
     public interface IUserService
     {
         string GetUserName();
-        string getDogName();
+        string GetUserId();
+        int GetDogId();
     }
 }

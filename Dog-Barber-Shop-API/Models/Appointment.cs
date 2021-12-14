@@ -7,16 +7,21 @@ namespace Dog_Barber_Shop_API.Models
     {
         public int Id { get; set; }
 
-        public string DogName { get; set; }
+        [Required]
+        public int DogId { get; set; }
+
+        public string ApplicationUserId { get; set; }
 
         [Required]
         public DateTime Time { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
-        public Appointment(string dogName, DateTime time)
+        public Appointment() { }
+        public Appointment(int dogId, string userId, DateTime time)
         {
-            DogName = dogName;
+            DogId = dogId;
+            ApplicationUserId = userId;
             Time = time;
             CreatedAt = DateTime.Now;
         }

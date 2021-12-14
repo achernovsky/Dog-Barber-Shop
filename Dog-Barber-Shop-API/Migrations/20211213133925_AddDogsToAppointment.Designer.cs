@@ -4,14 +4,16 @@ using Dog_Barber_Shop_API.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dog_Barber_Shop_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AppointmentContextModelSnapshot : ModelSnapshot
+    [Migration("20211213133925_AddDogsToAppointment")]
+    partial class AddDogsToAppointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +36,9 @@ namespace Dog_Barber_Shop_API.Migrations
 
                     b.Property<int>("DogId")
                         .HasColumnType("int");
+
+                    b.Property<string>("DogName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
@@ -271,6 +276,9 @@ namespace Dog_Barber_Shop_API.Migrations
             modelBuilder.Entity("Dog_Barber_Shop_API.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("DogName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
