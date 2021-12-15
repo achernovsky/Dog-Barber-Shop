@@ -43,9 +43,16 @@ namespace Dog_Barber_Shop_API
                 = Newtonsoft.Json.NullValueHandling.Ignore;
             });
 
-            services.AddCors(options => options.AddDefaultPolicy(
-                builder => builder.WithOrigins("http://localhost:4200")
-            ));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyAllowSpecificOrigins", builder =>
+                {
+                    builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
 
             services.AddScoped<IAppointmentRepo, AppointmentRepo>();
             services.AddScoped<IAdminRepo, AdminRepo>();
@@ -94,7 +101,7 @@ namespace Dog_Barber_Shop_API
                 app.UseDeveloperExceptionPage();
             }
             app.UseRouting();
-            app.UseCors();
+            app.UseCors("MyAllowSpecificOrigins");
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
