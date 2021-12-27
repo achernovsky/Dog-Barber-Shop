@@ -4,14 +4,16 @@ using Dog_Barber_Shop_API.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dog_Barber_Shop_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AppointmentContextModelSnapshot : ModelSnapshot
+    [Migration("20211215143450_AddDogToAppointment")]
+    partial class AddDogToAppointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

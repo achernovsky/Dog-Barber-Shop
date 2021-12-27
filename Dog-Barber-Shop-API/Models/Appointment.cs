@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dog_Barber_Shop_API.Models
 {
@@ -7,8 +8,9 @@ namespace Dog_Barber_Shop_API.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public int DogId { get; set; }
+
+        public Dog Dog { get; set; }
 
         public string ApplicationUserId { get; set; }
 

@@ -28,6 +28,7 @@ namespace Dog_Barber_Shop_API.Repositories
 
             if (appointment.DogId == 0)
                 throw new Exception("Dog name cannot be empty");
+            //var dog = _context.Dogs.Find(appointment.DogId);
 
             var newAppointment = new Appointment(appointment.DogId, appointment.ApplicationUserId, appointment.Time);
             await _context.Appointments.AddAsync(newAppointment);

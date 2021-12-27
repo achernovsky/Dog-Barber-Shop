@@ -30,23 +30,24 @@ namespace Dog_Barber_Shop_API.Repositories
         }
         public async Task<IEnumerable<Appointment>> GetAppointments()
         {
-            return await _context.Appointments.ToListAsync();
+            return await _context.Appointments.Include(a=>a.Dog).ToListAsync();
         }
         public async Task<Appointment> GetAppointment(int id)
         {
-            return await _context.Appointments.FindAsync(id);
+            var appointments = await _context.Appointments.Include(a => a.Dog).ToListAsync();
+            return appointments.Find(a =>  a.Id == id);
         }
         public async Task CreateAppointment(Appointment appointment)
         {
             if (appointment == null)
                 throw new ArgumentNullException(nameof(appointment));
 
-            var dog = _context.Dogs.Find(appointment.DogId);
+            var dog = await _context.Dogs.FirstAsync(d => d.Name == appointment.Dog.Name && d.ApplicationUserId == userId);
 
-            if (dog == null || dog.ApplicationUserId != userId)
+            if (dog == null)
                 throw new Exception("This is not your dog!");
 
-            DateTime appTime = appointment.Time;
+            DateTime appTime = appointment.Time.ToLocalTime();
             DateTime now = DateTime.Now;
             DayOfWeek day = appTime.DayOfWeek;
             int hour = appTime.Hour;
@@ -72,7 +73,7 @@ namespace Dog_Barber_Shop_API.Repositories
             if (isTimeTaken)
                 throw new Exception("Sorry, This time slot is already taken.");
 
-            var newAppointment = new Appointment(appointment.DogId, userId, appointment.Time);
+            var newAppointment = new Appointment(dog.Id, userId, appTime);
             await _context.Appointments.AddAsync(newAppointment);
         }
 
@@ -91,7 +92,7 @@ namespace Dog_Barber_Shop_API.Repositories
         public async Task<Appointment> PatchAppointment(int id, JsonPatchDocument<Appointment> patchData)
         { 
             var appointment = await _context.Appointments.FindAsync(id);
-            if (appointment == null || appointment.ApplicationUserId != userId)
+            if (appointment == null /*|| appointment.ApplicationUserId != userId*/)
                 return null;
             patchData.ApplyTo(appointment);
             return appointment;

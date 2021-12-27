@@ -4,14 +4,16 @@ using Dog_Barber_Shop_API.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dog_Barber_Shop_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AppointmentContextModelSnapshot : ModelSnapshot
+    [Migration("20211216083034_AddAppsToDog")]
+    partial class AddAppsToDog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,7 +286,7 @@ namespace Dog_Barber_Shop_API.Migrations
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Dog_Barber_Shop_API.Models.Dog", "Dog")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("DogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -348,6 +350,11 @@ namespace Dog_Barber_Shop_API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Dog_Barber_Shop_API.Models.Dog", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("Dog_Barber_Shop_API.Models.ApplicationUser", b =>

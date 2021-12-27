@@ -14,6 +14,7 @@ namespace Dog_Barber_Shop_API.Utils
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Appointment>().HasOne(a => a.Dog);
         }
 
         public DbSet<Appointment> Appointments { get; set; }
